@@ -44,10 +44,10 @@ let ten_millis = time::Duration::from_millis(1000);
     write_8_bit_number(&mut port, 1);
 
     write_8_bit_number(&mut port, 100);
-    write_8_bit_number(&mut port, 100);
+    write_8_bit_number(&mut port, 1);
     write_8_bit_number(&mut port, 1);
 
-    write_8_bit_number(&mut port, 100);
-    write_8_bit_number(&mut port, 100);
     write_8_bit_number(&mut port, 1);
+    write_8_bit_number(&mut port, 1);
+    write_8_bit_number(&mut port, 100);
 }
