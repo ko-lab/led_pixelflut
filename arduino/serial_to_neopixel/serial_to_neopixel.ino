@@ -5,7 +5,7 @@
 #include <FastLED.h>
 
 // How many leds in your strip?
-#define NUM_LEDS 3
+#define NUM_LEDS 256
 
 // For led chips like WS2812, which have a data line, ground, and power, you just
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
@@ -21,10 +21,14 @@ void setup() {
     // Uncomment/edit one of the following lines for your leds arrangement.
     // ## Clockless types ##
     FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed
+    for (int i =0; i< NUM_LEDS; i++){
+      leds[i] = CRGB(64, 0, 0);
+    }
+    FastLED.show();
     Serial.begin(115200);
-    leds[0] = CRGB(100, 0, 0);
-    leds[1] = CRGB(0, 100, 0);;
-    leds[2] = CRGB(0, 0, 100);;
+    for (int i =0; i< NUM_LEDS; i++){
+      leds[i] = CRGB(64, 64, 64);
+    }
 
     FastLED.show();
 
@@ -38,7 +42,9 @@ void loop() {
     if(currColor == 0) {
       leds[currLed] = currLedVals;
       currLed = (currLed + 1) % NUM_LEDS;
-      FastLED.show();
+      if(currLed == 0){
+        FastLED.show();
+      }
     }
   }
 
