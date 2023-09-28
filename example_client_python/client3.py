@@ -2,8 +2,8 @@ import socket
 import random
 from PIL import Image
 
-HOST = 'localhost'
-PORT = 1337
+HOST = '10.66.66.100'
+PORT = 10108
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((HOST, PORT))
 
@@ -28,7 +28,6 @@ def worm(x=400, y=400, n=1000000, r=random.randint(0,255), g=random.randint(0,25
         x += random.randint(0, 2) - 1
         y += random.randint(0, 2) - 1
         n -= 1
-
 
 im = Image.open('test.png').convert('RGB')
 im.thumbnail((256, 256), Image.LANCZOS)
