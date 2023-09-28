@@ -8,10 +8,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((HOST, PORT))
 
 def pixel(x, y, r, g, b, a=255):
+  try:
     if a == 255:
         sock.send(bytes('PX %d %d %02x%02x%02x\n' % (x, y, r, g, b), 'utf-8'))
     else:
         sock.send(bytes('PX %d %d %02x%02x%02x%02x\n' % (x, y, r, g, b, a), 'utf-8'))
+  except Exception as e:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((HOST, PORT))
 
 # A few helper functions:
 
@@ -22,7 +26,7 @@ def rect(x, y, w, h, r, g, b):
 
 rect(0, 0, 100, 100, 100, 100, 100)
 
-def worm(x=400, y=400, n=1000000, r=random.randint(0,255), g=random.randint(0,255), b=random.randint(0,255)):
+def worm(x=512, y=512, n=1000000, r=random.randint(0,255), g=random.randint(0,255), b=random.randint(0,255)):
     while n:
         pixel(x, y, r, g, b, 25)
         x += random.randint(0, 2) - 1
