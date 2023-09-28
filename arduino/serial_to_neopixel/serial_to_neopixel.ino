@@ -44,6 +44,7 @@ void loop() {
       currLed = (currLed + 1) % NUM_LEDS;
       if(currLed == 0){
         FastLED.show();
+        Serial.write('G');  // This is for flow control, because the show takes a long time, and there is no built in flow control, we need to use this to make sure that the next matrix is not being sent yet while the display is being refreshed
       }
     }
   }
