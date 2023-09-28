@@ -41,6 +41,7 @@ _, _, w, h = im.getbbox()
 for x in range(w):
     for y in range(h):
         r, g, b = im.getpixel((x, y))
-        pixel(x + x_offset, y + y_offset, r, g, b)
+        if r + g + b > 0:
+            pixel(x + x_offset, y + y_offset, r, g, b)
 
 worm()
