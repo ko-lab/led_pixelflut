@@ -34,7 +34,7 @@ fn main() {
 
 fn full_display_color_cycle(mut port: &mut Box<dyn SerialPort>) {
     for i in 0..256 {
-        send_pixel(&mut port, 0, 64, 0);
+        send_pixel(&mut port, 0, 2, 0);
     }
     const WAIT_TIME: u64 = 0;
     let mut buffer: [u8; 1] = [0; 1];
@@ -42,13 +42,13 @@ fn full_display_color_cycle(mut port: &mut Box<dyn SerialPort>) {
     port.read(&mut buffer).expect("read_to_string failed");
 
     for i in 0..256 {
-        send_pixel(&mut port, 0, 0, 64);
+        send_pixel(&mut port, 0, 0, 2);
     }
     port.read(&mut buffer).expect("read_to_string failed");
     sleep(Duration::from_millis(WAIT_TIME));
 
     for i in 0..256 {
-        send_pixel(&mut port, 64, 0, 0);
+        send_pixel(&mut port, 2, 0, 0);
     }
     port.read(&mut buffer).expect("read_to_string failed");
     sleep(Duration::from_millis(WAIT_TIME));
