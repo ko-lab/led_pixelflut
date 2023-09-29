@@ -54,20 +54,25 @@ while True:
     image_choice = random.randint(0, len(image_options));
     try:
         im = Image.open(image_options[image_choice]).convert('RGB')
-        im.thumbnail((150, 150), Image.LANCZOS)
+        imageSize = random.randint(50, 250)
+        im.thumbnail((imageSize, imageSize), Image.LANCZOS)
         x_offset = random.randint(0, width - 256)
         y_offset = random.randint(0, height - 256)
         _, _, w, h = im.getbbox()
+        blockR = random.randint(0, 255)
+        blockG = random.randint(0, 255)
+        blockB = random.randint(0, 255)
         for x in range(w):
             for y in range(h):
                 if block:
-                    r, g, b = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+                    r, g, b = (blockR, blockG, blockB)
                 else:
                     r, g, b = im.getpixel((x, y))
                 if (r + g + b > 0) or block:
                     pixel(x + x_offset, y + y_offset, r, g, b)
 
-        worm(random.randint(0, width), random.randint(0, height), 30000, random.randint(0, 255),
+        wormLen = random.randint(1000,100000)
+        worm(random.randint(0, width), random.randint(0, height), wormLen, random.randint(0, 255),
              random.randint(0, 255),
              random.randint(0, 255))
     except Exception as e:
