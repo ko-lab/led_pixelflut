@@ -12,7 +12,7 @@ DELAY_PER_PIXEL_S= 0.001
 
 def pixel(x, y, r, g, b, a=255):
     # print('pixel')
-    # time.sleep(DELAY_PER_PIXEL_S)
+    time.sleep(DELAY_PER_PIXEL_S)
     global sock
     if a == 255:
         sock.send(bytes('PX %d %d %02x%02x%02x\n' % (x, y, r, g, b), 'utf-8'))
@@ -30,8 +30,8 @@ def rect(x, y, w, h, r, g, b):
 
 rect(0, 0, 100, 100, 100, 100, 100)
 
-width = 1280
-height = 780
+width = 1920
+height = 1080
 
 
 def worm(x, y, n, r, g, b):
@@ -54,7 +54,7 @@ while True:
     image_choice = random.randint(0, len(image_options));
     try:
         im = Image.open(image_options[image_choice]).convert('RGB')
-        im.thumbnail((100, 100), Image.LANCZOS)
+        im.thumbnail((150, 150), Image.LANCZOS)
         x_offset = random.randint(0, width - 256)
         y_offset = random.randint(0, height - 256)
         _, _, w, h = im.getbbox()
@@ -67,7 +67,7 @@ while True:
                 if (r + g + b > 0) or black:
                     pixel(x + x_offset, y + y_offset, r, g, b)
 
-        worm(random.randint(0, width), random.randint(0, height), 10000000, random.randint(0, 255),
+        worm(random.randint(0, width), random.randint(0, height), 30000, random.randint(0, 255),
              random.randint(0, 255),
              random.randint(0, 255))
     except Exception as e:
