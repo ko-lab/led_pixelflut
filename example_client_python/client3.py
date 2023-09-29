@@ -50,7 +50,7 @@ i=0
 while True:
     print('starting loop '+str(i))
     i=i+1
-    black = random.randint(0, 1) > 0
+    block = random.randint(0, 1) > 0
     image_choice = random.randint(0, len(image_options));
     try:
         im = Image.open(image_options[image_choice]).convert('RGB')
@@ -60,11 +60,11 @@ while True:
         _, _, w, h = im.getbbox()
         for x in range(w):
             for y in range(h):
-                if black:
-                    r, g, b = (10, 10, 10)
+                if block:
+                    r, g, b = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
                 else:
                     r, g, b = im.getpixel((x, y))
-                if (r + g + b > 0) or black:
+                if (r + g + b > 0) or block:
                     pixel(x + x_offset, y + y_offset, r, g, b)
 
         worm(random.randint(0, width), random.randint(0, height), 30000, random.randint(0, 255),
